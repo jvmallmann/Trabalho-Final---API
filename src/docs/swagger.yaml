@@ -1,0 +1,656 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API Gerenciamento de Hospital",
+    "description": "Documentação da API Gerenciamento de Hospital"
+  },
+  "host": "localhost:3000",
+  "basePath": "",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/paciente": {
+      "post": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Insere um novo Paciente",
+        "description": "Cadastra um novo Paciente no sistema.",
+        "parameters": [
+          {
+            "name": "paciente",
+            "in": "body",
+            "description": "Informações do Paciente a ser cadastrado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PacienteNome": {
+                  "type": "string",
+                  "example": "Maria Silva"
+                },
+                "DataNascimento": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                },
+                "Sexo": {
+                  "type": "string",
+                  "example": "F"
+                },
+                "Endereco": {
+                  "type": "string",
+                  "example": "Rua das Flores, 123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Paciente cadastrado com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Consulta lista de Pacientes",
+        "description": "Consulta a lista de todos os Pacientes cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "Lista de Pacientes retornada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "PacienteNome": {
+                    "type": "string",
+                    "example": "Maria Silva"
+                  },
+                  "DataNascimento": {
+                    "type": "string",
+                    "example": "1990-01-01"
+                  },
+                  "Sexo": {
+                    "type": "string",
+                    "example": "F"
+                  },
+                  "Endereco": {
+                    "type": "string",
+                    "example": "Rua das Flores, 123"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Atualiza informações de um Paciente",
+        "description": "Atualiza informações de um Paciente já cadastrado no sistema.",
+        "parameters": [
+          {
+            "name": "paciente",
+            "in": "body",
+            "description": "Informações atualizadas do Paciente",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PacienteNome": {
+                  "type": "string",
+                  "example": "Maria Silva"
+                },
+                "DataNascimento": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                },
+                "Sexo": {
+                  "type": "string",
+                  "example": "F"
+                },
+                "Endereco": {
+                  "type": "string",
+                  "example": "Rua das Flores, 123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paciente atualizado com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Substitui informações de um Paciente",
+        "description": "Substitui todas as informações de um Paciente existente no sistema.",
+        "parameters": [
+          {
+            "name": "paciente",
+            "in": "body",
+            "description": "Informações completas do Paciente",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PacienteNome": {
+                  "type": "string",
+                  "example": "Maria Silva"
+                },
+                "DataNascimento": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                },
+                "Sexo": {
+                  "type": "string",
+                  "example": "F"
+                },
+                "Endereco": {
+                  "type": "string",
+                  "example": "Rua das Flores, 123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações do Paciente substituídas com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/paciente/{id}": {
+      "delete": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Remove um Paciente",
+        "description": "Remove um Paciente cadastrado no sistema, baseado no ID fornecido.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do Paciente a ser removido"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paciente removido com sucesso"
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/medico": {
+      "post": {
+        "tags": [
+          "Médicos"
+        ],
+        "summary": "Insere um novo Médico",
+        "description": "Cadastra um novo Médico no sistema.",
+        "parameters": [
+          {
+            "name": "medico",
+            "in": "body",
+            "description": "Informações do Médico a ser cadastrado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "MedicoNome": {
+                  "type": "string",
+                  "example": "Dr. João Silva"
+                },
+                "Especialidade": {
+                  "type": "string",
+                  "example": "Cardiologia"
+                },
+                "CRM": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "MedicoTelefone": {
+                  "type": "string",
+                  "example": "(11) 98765-4321"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Médico cadastrado com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Médicos"
+        ],
+        "summary": "Consulta lista de Médicos",
+        "description": "Consulta a lista de todos os Médicos cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "Lista de Médicos retornada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "MedicoID": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "MedicoNome": {
+                    "type": "string",
+                    "example": "Dr. João Silva"
+                  },
+                  "Especialidade": {
+                    "type": "string",
+                    "example": "Cardiologia"
+                  },
+                  "CRM": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "MedicoTelefone": {
+                    "type": "string",
+                    "example": "(11) 98765-4321"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Médicos"
+        ],
+        "summary": "Atualiza informações de um Médico",
+        "description": "Atualiza informações de um Médico já cadastrado no sistema.",
+        "parameters": [
+          {
+            "name": "medico",
+            "in": "body",
+            "description": "Informações atualizadas do Médico",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "MedicoNome": {
+                  "type": "string",
+                  "example": "Dr. João Silva"
+                },
+                "Especialidade": {
+                  "type": "string",
+                  "example": "Cardiologia"
+                },
+                "CRM": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "MedicoTelefone": {
+                  "type": "string",
+                  "example": "(11) 98765-4321"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Médico atualizado com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Médicos"
+        ],
+        "summary": "Substitui informações de um Médico",
+        "description": "Substitui todas as informações de um Médico existente no sistema.",
+        "parameters": [
+          {
+            "name": "medico",
+            "in": "body",
+            "description": "Informações completas do Médico",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "MedicoNome": {
+                  "type": "string",
+                  "example": "Dr. João Silva"
+                },
+                "Especialidade": {
+                  "type": "string",
+                  "example": "Cardiologia"
+                },
+                "CRM": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "MedicoTelefone": {
+                  "type": "string",
+                  "example": "(11) 98765-4321"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações do Médico substituídas com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/medico/{MedicoID}": {
+      "delete": {
+        "tags": [
+          "Médicos"
+        ],
+        "summary": "Remove um Médico",
+        "description": "Remove um Médico cadastrado no sistema, baseado no ID fornecido.",
+        "parameters": [
+          {
+            "name": "MedicoID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do Médico a ser removido"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Médico removido com sucesso"
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/enfermeiro": {
+      "post": {
+        "tags": [
+          "Enfermeiros"
+        ],
+        "summary": "Insere um novo Enfermeiro",
+        "description": "Cadastra um novo Enfermeiro no sistema.",
+        "parameters": [
+          {
+            "name": "enfermeiro",
+            "in": "body",
+            "description": "Informações do Enfermeiro a ser cadastrado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "EnfermeiroNome": {
+                  "type": "string",
+                  "example": "Ana Souza"
+                },
+                "Registro": {
+                  "type": "string",
+                  "example": "ENF12345"
+                },
+                "EnfermeiroTelefone": {
+                  "type": "string",
+                  "example": "(11) 98765-4321"
+                },
+                "DataAdmissao": {
+                  "type": "string",
+                  "example": "2024-01-01"
+                },
+                "Turno": {
+                  "type": "string",
+                  "example": "Diurno"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Enfermeiro cadastrado com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Enfermeiros"
+        ],
+        "summary": "Consulta lista de Enfermeiros",
+        "description": "Consulta a lista de todos os Enfermeiros cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "Lista de Enfermeiros retornada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "EnfermeiroNome": {
+                    "type": "string",
+                    "example": "Ana Souza"
+                  },
+                  "Registro": {
+                    "type": "string",
+                    "example": "ENF12345"
+                  },
+                  "EnfermeiroTelefone": {
+                    "type": "string",
+                    "example": "(11) 98765-4321"
+                  },
+                  "DataAdmissao": {
+                    "type": "string",
+                    "example": "2024-01-01"
+                  },
+                  "Turno": {
+                    "type": "string",
+                    "example": "Diurno"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Enfermeiros"
+        ],
+        "summary": "Atualiza informações de um Enfermeiro",
+        "description": "Atualiza informações de um Enfermeiro já cadastrado no sistema.",
+        "parameters": [
+          {
+            "name": "enfermeiro",
+            "in": "body",
+            "description": "Informações atualizadas do Enfermeiro",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "EnfermeiroNome": {
+                  "type": "string",
+                  "example": "Ana Souza"
+                },
+                "Registro": {
+                  "type": "string",
+                  "example": "ENF12345"
+                },
+                "EnfermeiroTelefone": {
+                  "type": "string",
+                  "example": "(11) 98765-4321"
+                },
+                "DataAdmissao": {
+                  "type": "string",
+                  "example": "2024-01-01"
+                },
+                "Turno": {
+                  "type": "string",
+                  "example": "Noturno"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Enfermeiro atualizado com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Enfermeiros"
+        ],
+        "summary": "Substitui informações de um Enfermeiro",
+        "description": "Substitui todas as informações de um Enfermeiro existente no sistema.",
+        "parameters": [
+          {
+            "name": "enfermeiro",
+            "in": "body",
+            "description": "Informações completas do Enfermeiro",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "EnfermeiroNome": {
+                  "type": "string",
+                  "example": "Ana Souza"
+                },
+                "Registro": {
+                  "type": "string",
+                  "example": "ENF12345"
+                },
+                "EnfermeiroTelefone": {
+                  "type": "string",
+                  "example": "(11) 98765-4321"
+                },
+                "DataAdmissao": {
+                  "type": "string",
+                  "example": "2024-01-01"
+                },
+                "Turno": {
+                  "type": "string",
+                  "example": "Noturno"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações do Enfermeiro substituídas com sucesso"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/enfermeiro/{id}": {
+      "delete": {
+        "tags": [
+          "Enfermeiros"
+        ],
+        "summary": "Remove um Enfermeiro",
+        "description": "Remove um Enfermeiro cadastrado no sistema, baseado no ID fornecido.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do Enfermeiro a ser removido"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Enfermeiro removido com sucesso"
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    }
+  }
+}

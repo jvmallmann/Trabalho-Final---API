@@ -19,29 +19,41 @@ const getPacientes = async (req, res) => {
 };
 
 
-// const deleteUser = async (req, res, next) => {
-//     try {
-//         const retorno = await usuarioService.deleteUser(req.params)
-//         res.status(204).json(retorno)
-//     } catch (err){
-//         res.status(500).send(err.message)
-//     }
-// }
+const deletePacientes = async (req, res, next) => {
+    try {
+        const retorno = await pacientesService.deletePacientes(req.params)
+        res.status(204).json(retorno)
+    } catch (err){
+        res.status(500).send(err.message)
+    }
+}
 
-// const patchPassword = async (req, res, next) => {
-//     try {
-//         let params = req.body
-//         params.id = req.params.id
-//         const retorno = await usuarioService.patchPassword(params)
-//         .then(ret => res.status(200).send(ret))
-//         .catch(err => res.status(500).send(err.message))
-//     } catch (err){
-//         res.status(500).send(err.message)
-//     }
-// }
+const putPacientes = async (req, res, next) => {
+    try {
+      let params = req.body
+      params.id = req.params.id
+      await pacientesService.putPacientes(params)
+      .then(ret => res.status(200).send(ret))
+      .catch(err => res.status(500).send(err))
+    } catch (err) {
+      next(err);
+    }
+  }
 
-// module.exports.patchPassword = patchPassword
-module.exports = { postPacientes, getPacientes };
+  const patchPacientes = async (req, res, next) => {
+    try {
+      let params = req.body
+      params.id = req.params.id
+      await pacientesService.patchPacientes(params)
+      .then(ret => res.status(200).send(ret))
+      .catch(err => res.status(500).send(err))
+    } catch (err) {
+      next(err);
+    }
+  }
+
+module.exports.patchPacientes = patchPacientes
 module.exports.postPacientes = postPacientes
+module.exports.deletePacientes = deletePacientes
 module.exports.getPacientes = getPacientes
-// module.exports.deleteUser = deleteUser
+module.exports.putPacientes = putPacientes
