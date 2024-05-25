@@ -13,7 +13,7 @@ module.exports = (app) => {
           schema: {
               MedicoNome: 'Dr. João Silva',
               Especialidade: 'Cardiologia',
-              CRM: '123456',
+              CRM: '123456/SP',
               MedicoTelefone: '(11) 98765-4321'
           }
       }
@@ -34,7 +34,7 @@ module.exports = (app) => {
               MedicoID: 1,
               MedicoNome: 'Dr. João Silva',
               Especialidade: 'Cardiologia',
-              CRM: '123456',
+              CRM: '123456/SP',
               MedicoTelefone: '(11) 98765-4321'
           }]
       }
@@ -53,7 +53,7 @@ module.exports = (app) => {
           schema: {
               MedicoNome: 'Dr. João Silva',
               Especialidade: 'Cardiologia',
-              CRM: '123456',
+              CRM: '123456/SP',
               MedicoTelefone: '(11) 98765-4321'
           }
       }

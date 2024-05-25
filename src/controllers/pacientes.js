@@ -1,6 +1,11 @@
+const { validateNewPaciente } = require('../validates/pacientes');
 const pacientesService = require('../services/pacientes');
 
 const postPacientes = async (req, res) => {
+    const errors = validateNewPaciente(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    }
     try {
         const retorno = await pacientesService.postPacientes(req.body);
         res.status(201).json(retorno);
@@ -10,12 +15,12 @@ const postPacientes = async (req, res) => {
 };
 
 const getPacientes = async (req, res) => {
-    try {
-        const retorno = await pacientesService.getPacientes();
-        res.status(200).json(retorno);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
+  try {
+      const retorno = await pacientesService.getPacientes();
+      res.status(200).json(retorno);
+  } catch (err) {
+      res.status(500).send(err.message);
+  }
 };
 
 

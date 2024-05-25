@@ -1,12 +1,17 @@
+const { validateNewEnfermeiro } = require('../validates/enfermeiros');
 const enfermeirosService = require('../services/enfermeiros');
 
 const postEnfermeiros = async (req, res) => {
+    const errors = validateNewEnfermeiro(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    }    
     try {
-        const retorno = await enfermeirosService.postEnfermeiros(req.body);
-        res.status(201).json(retorno);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
+          const retorno = await enfermeirosService.postEnfermeiros(req.body);
+          res.status(201).json(retorno);
+      } catch (err) {
+          res.status(500).send(err.message);
+      }
 };
 
 const getEnfermeiros = async (req, res) => {

@@ -1,7 +1,12 @@
+const { validateNewMedico } = require('../validates/medicos');
 const medicosService = require('../services/medicos');
 
 const postMedicos = async (req, res) => {
-    try {
+    const errors = validateNewMedico(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    }  
+  try {
         const retorno = await medicosService.postMedicos(req.body);
         res.status(201).json(retorno);
     } catch (err) {

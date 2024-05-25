@@ -1,6 +1,11 @@
+const { validateNewEnfermaria } = require('../validates/enfermarias');
 const enfermariasService = require('../services/enfermarias');
 
 const postEnfermarias = async (req, res) => {
+    const errors = validateNewEnfermaria(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    }  
     try {
         const retorno = await enfermariasService.postEnfermarias(req.body);
         res.status(201).json(retorno);

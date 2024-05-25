@@ -17,7 +17,7 @@ module.exports = (app) => {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
             EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '2024-01-01',
+            DataAdmissao: '01-01-2024',
             Turno: 'Diurno'
         }
     }
@@ -38,7 +38,7 @@ module.exports = (app) => {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
             EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '2024-01-01',
+            DataAdmissao: '01-01-2024',
             Turno: 'Diurno'
         }]
     }
@@ -47,7 +47,7 @@ module.exports = (app) => {
 
     app.patch('/enfermeiro/:id', enfermeirosController.patchEnfermeiros
     /**  
-     #swagger.tags = ["Enfermeiros"]
+    #swagger.tags = ["Enfermeiros"]
     #swagger.summary = 'Atualiza informações de um Enfermeiro'
     #swagger.description = 'Atualiza informações de um Enfermeiro já cadastrado no sistema.'
     #swagger.parameters['enfermeiro'] = {
@@ -59,7 +59,7 @@ module.exports = (app) => {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
             EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '2024-01-01',
+            DataAdmissao: '01-01-2024',
             Turno: 'Noturno'
         }
     }

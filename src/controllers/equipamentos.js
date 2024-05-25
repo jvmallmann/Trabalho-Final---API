@@ -1,6 +1,12 @@
+const { validateNewEquipamento } = require('../validates/equipamentos');
 const equipamentosService = require('../services/equipamentos');
 
+
 const postEquipamentos = async (req, res) => {
+    const errors = validateNewEquipamento(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    } 
     try {
         const retorno = await equipamentosService.postEquipamentos(req.body);
         res.status(201).json(retorno);
@@ -29,8 +35,6 @@ const patchEquipamentos = async (req, res, next) => {
       next(err);
     }
   }
-
-
   const deleteEquipamentos = async (req, res, next) => {
     try{
         await equipamentosService.deleteEquipamentos(req.params)
@@ -40,8 +44,6 @@ const patchEquipamentos = async (req, res, next) => {
         next(err)
     }
 }
-
-
 
 module.exports.postEquipamentos = postEquipamentos
 module.exports.getEquipamentos = getEquipamentos
