@@ -45,7 +45,7 @@ module.exports = (app) => {
     */
     )
 
-    app.patch('/enfermeiro', enfermeirosController.patchEnfermeiros
+    app.patch('/enfermeiro/:id', enfermeirosController.patchEnfermeiros
     /**  
      #swagger.tags = ["Enfermeiros"]
     #swagger.summary = 'Atualiza informações de um Enfermeiro'
@@ -54,6 +54,7 @@ module.exports = (app) => {
         in: 'body',
         description: 'Informações atualizadas do Enfermeiro',
         required: true,
+        type: 'json',
         schema: {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
@@ -64,29 +65,6 @@ module.exports = (app) => {
     }
     #swagger.responses[200] = {
         description: 'Enfermeiro atualizado com sucesso'
-    }
-    */
-    )
-
-    app.put('/enfermeiro', enfermeirosController.putEnfermeiros
-    /**  
-     #swagger.tags = ["Enfermeiros"]
-    #swagger.summary = 'Substitui informações de um Enfermeiro'
-    #swagger.description = 'Substitui todas as informações de um Enfermeiro existente no sistema.'
-    #swagger.parameters['enfermeiro'] = {
-        in: 'body',
-        description: 'Informações completas do Enfermeiro',
-        required: true,
-        schema: {
-            EnfermeiroNome: 'Ana Souza',
-            Registro: 'ENF12345',
-            EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '2024-01-01',
-            Turno: 'Noturno'
-        }
-    }
-    #swagger.responses[200] = {
-        description: 'Informações do Enfermeiro substituídas com sucesso'
     }
     */
     )

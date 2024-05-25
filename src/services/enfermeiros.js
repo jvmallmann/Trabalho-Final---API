@@ -38,29 +38,14 @@ const sql_delete = `DELETE FROM enfermeiros WHERE EnfermeiroID = $1`;
 
 const deleteEnfermeiros = async (params) => {
     try {
-        const { EnfermeiroID } = params;
-        const result = await db.query(sql_delete, [EnfermeiroID]);
+        const { id } = params;
+        const result = await db.query(sql_delete, [id]);
         return result.rowCount > 0; // Retorna true se um paciente foi deletado, false caso contrário
     } catch (error) {
         console.error('Erro ao deletar o Enfermeiros:', error);
         throw error;
     }
 };
-
-const SqlPutEnfermeiro =
-    `UPDATE enfermeiros
-        SET EnfermeiroNome = $2,
-            Registro = $3,
-            EnfermeiroTelefone = $4,
-            DataAdmissao = $5,
-            Turno = $6
-        WHERE EnfermeiroID = $1`;
-
-const putEnfermeiros = async (params) => {
-    const {EnfermeiroID, EnfermeiroNome, Registro, EnfermeiroTelefone, DataAdmissao, Turno} = params
-    return await db.query(SqlPutEnfermeiro, [EnfermeiroID, EnfermeiroNome, Registro, EnfermeiroTelefone, DataAdmissao, Turno])
-}
-
 
 const sql_patchEnfermeiros = 
     `UPDATE enfermeiros
@@ -69,7 +54,7 @@ const sql_patchEnfermeiros =
 const patchEnfermeiros = async (params) => {
     let fields = '';
     let binds = [];
-    binds.push(params.EnfermeiroID);
+    binds.push(params.id);
     let countParams = 1;
 
     if (params.EnfermeiroNome) {
@@ -108,6 +93,5 @@ const patchEnfermeiros = async (params) => {
 
 module.exports.postEnfermeiros = postEnfermeiros
 module.exports.patchEnfermeiros = patchEnfermeiros
-module.exports.putEnfermeiros = putEnfermeiros
 module.exports.getEnfermeiros = getEnfermeiros
 module.exports.deleteEnfermeiros = deleteEnfermeiros

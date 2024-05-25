@@ -37,70 +37,61 @@ const sql_delete = `DELETE FROM medicos WHERE MedicoID = $1`;
 
 const deleteMedicos = async (params) => {
     try {
-        const { MedicoID } = params;
-        const result = await db.query(sql_delete, [MedicoID]);
-        return result.rowCount > 0; // Retorna true se um paciente foi deletado, false caso contrário
+        const { id } = params;
+        const result = await db.query(sql_delete, [id]);
+        return result.rowCount > 0; // Retorna true se um medico foi deletado, false caso contrário
     } catch (error) {
         console.error('Erro ao deletar o Medicos:', error);
         throw error;
     }
 };
 
-
-const SqlPutMedico =
-    `update medicos
-        set MedicoNome = $2,
-        Especialidade = $3,
-        CRM = $4,
-        MedicoTelefone = $5
-        where MedicoID = $1`
-
-const putMedicos = async (params) => {
-    const {MedicoID, MedicoNome, Especialidade, CRM, MedicoTelefone} = params
-    return await db.query(SqlPutMedico, [MedicoID, MedicoNome, Especialidade, CRM, MedicoTelefone])
-}
-
-const sql_patch = 
-    `UPDATE medicos
-        SET `;
+const sql_patch_medicos = `UPDATE medicos SET`;
 
 const patchMedicos = async (params) => {
+    
     let fields = '';
-    let binds = [];
-    binds.push(params.MedicoID);
+    let binds = [params.id];
     let countParams = 1;
 
     if (params.MedicoNome) {
         countParams++;
-        fields += `MedicoNome = $${countParams}`;
+        fields += ` MedicoNome = $${countParams} `;
         binds.push(params.MedicoNome);
     }
     if (params.Especialidade) {
         countParams++;
-        fields += (fields ? ', ' : '') + `Especialidade = $${countParams}`;
+        fields += (fields ? ',' : '') + ` Especialidade = $${countParams} `;
         binds.push(params.Especialidade);
     }
     if (params.CRM) {
         countParams++;
-        fields += (fields ? ', ' : '') + `CRM = $${countParams}`;
+        fields += (fields ? ',' : '') + ` CRM = $${countParams} `;
         binds.push(params.CRM);
     }
     if (params.MedicoTelefone) {
         countParams++;
-        fields += (fields ? ', ' : '') + `MedicoTelefone = $${countParams}`;
+        fields += (fields ? ',' : '') + ` MedicoTelefone = $${countParams} `;
         binds.push(params.MedicoTelefone);
     }
 
-    if (!fields) {
-        throw new Error('At least one field must be provided for PATCH operation');
+    if (fields === '') {
+        throw new Error('Nenhum campo válido para atualizar');
     }
 
-    let sql = sql_patch + fields + ' WHERE MedicoID = $1';
-    return await db.query(sql, binds);
-}
+    let sql = sql_patch_medicos + fields + ' WHERE MedicoID = $1 RETURNING *;';
+    try {
+        const result = await db.query(sql, binds);
+        return result.rows[0];
+    } catch (error) {
+        console.error('Erro ao atualizar médico:', error);
+        throw error;
+    }
+};
+
+
 
 module.exports.postMedicos = postMedicos
 module.exports.patchMedicos = patchMedicos
-module.exports.putMedicos = putMedicos
 module.exports.getMedicos = getMedicos
 module.exports.deleteMedicos = deleteMedicos

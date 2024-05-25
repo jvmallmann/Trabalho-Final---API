@@ -28,18 +28,6 @@ const deletePacientes = async (req, res, next) => {
     }
 }
 
-const putPacientes = async (req, res, next) => {
-    try {
-      let params = req.body
-      params.id = req.params.id
-      await pacientesService.putPacientes(params)
-      .then(ret => res.status(200).send(ret))
-      .catch(err => res.status(500).send(err))
-    } catch (err) {
-      next(err);
-    }
-  }
-
   const patchPacientes = async (req, res, next) => {
     try {
       let params = req.body
@@ -52,8 +40,9 @@ const putPacientes = async (req, res, next) => {
     }
   }
 
+
+
 module.exports.patchPacientes = patchPacientes
 module.exports.postPacientes = postPacientes
 module.exports.deletePacientes = deletePacientes
 module.exports.getPacientes = getPacientes
-module.exports.putPacientes = putPacientes

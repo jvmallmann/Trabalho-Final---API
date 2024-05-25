@@ -45,47 +45,32 @@ const deletePacientes = async (params) => {
     }
 };
 
-const SqlPutPaciente =
-    `update pacientes
-        set PacienteNome = $2,
-        DataNascimento = $3,
-        Sexo = $4,
-        Endereco = $5
-        where PacienteID = $1`
 
-const putPacientes = async (params) => {
-    const {PacienteID, PacienteNome, DataNascimento, Sexo, Endereco} = params
-    return await db.query(SqlPutPaciente, [PacienteID, PacienteNome, DataNascimento, Sexo, Endereco])
-}
-
-const sql_patch = 
-    `UPDATE pacientes
-        SET `;
+const sql_patch = `UPDATE pacientes SET`;
 
 const patchPacientes = async (params) => {
     let fields = '';
-    let binds = [];
-    binds.push(params.PacienteID);
+    let binds = [params.id];
     let countParams = 1;
 
     if (params.PacienteNome) {
         countParams++;
-        fields += `PacienteNome = $${countParams}`;
+        fields += ` PacienteNome = $${countParams}`;
         binds.push(params.PacienteNome);
     }
     if (params.DataNascimento) {
         countParams++;
-        fields += (fields ? ', ' : '') + `DataNascimento = $${countParams}`;
+        fields += (fields ? ', ' : '') + ` DataNascimento = $${countParams}`;
         binds.push(params.DataNascimento);
     }
     if (params.Sexo) {
         countParams++;
-        fields += (fields ? ', ' : '') + `Sexo = $${countParams}`;
+        fields += (fields ? ', ' : '') + ` Sexo = $${countParams}`;
         binds.push(params.Sexo);
     }
     if (params.Endereco) {
         countParams++;
-        fields += (fields ? ', ' : '') + `Endereco = $${countParams}`;
+        fields += (fields ? ', ' : '') + ` Endereco = $${countParams}`;
         binds.push(params.Endereco);
     }
 
@@ -93,16 +78,21 @@ const patchPacientes = async (params) => {
         throw new Error('At least one field must be provided for PATCH operation');
     }
 
-    let sql = sql_patch + fields + ' WHERE PacienteID = $1';
-    return await db.query(sql, binds);
-}
+    let sql = sql_patch + fields + ' WHERE PacienteID = $1 RETURNING *;';
+    try {
+        const result = await db.query(sql, binds);
+        return result.rows[0];
+    } catch (error) {
+        console.error('Erro ao atualizar paciente:', error);
+        throw error;
+    }
+};
 
 
 
 module.exports.getPacientes = getPacientes
 module.exports.postPacientes = postPacientes
 module.exports.deletePacientes = deletePacientes
-module.exports.putPacientes = putPacientes
 module.exports.patchPacientes = patchPacientes
 
 

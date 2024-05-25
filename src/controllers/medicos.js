@@ -30,18 +30,6 @@ const patchMedicos = async (req, res, next) => {
     }
   }
 
-  const putMedicos = async (req, res, next) => {
-    try {
-      let params = req.body
-      params.id = req.params.id
-      await medicosService.putMedicos(params)
-      .then(ret => res.status(200).send(ret))
-      .catch(err => res.status(500).send(err))
-    } catch (err) {
-      next(err);
-    }
-  }
-
   const deleteMedicos = async (req, res, next) => {
     try{
         await medicosService.deleteMedicos(req.params)
@@ -55,5 +43,4 @@ const patchMedicos = async (req, res, next) => {
 module.exports.postMedicos = postMedicos
 module.exports.getMedicos = getMedicos
 module.exports.patchMedicos = patchMedicos
-module.exports.putMedicos = putMedicos
 module.exports.deleteMedicos = deleteMedicos

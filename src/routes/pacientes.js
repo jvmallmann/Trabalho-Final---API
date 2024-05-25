@@ -40,7 +40,7 @@ module.exports = (app) => {
      */
     )
     
-    app.patch('/paciente', pacientesController.patchPacientes
+    app.patch('/paciente/:id', pacientesController.patchPacientes
     /**  
       #swagger.tags = ["Pacientes"]
       #swagger.summary = 'Atualiza informações de um Paciente'
@@ -58,28 +58,6 @@ module.exports = (app) => {
       }
       #swagger.responses[200] = {
           description: 'Paciente atualizado com sucesso'
-      }
-     */
-    )
-    
-    app.put('/paciente', pacientesController.putPacientes
-    /**  
-      #swagger.tags = ["Pacientes"]
-      #swagger.summary = 'Substitui informações de um Paciente'
-      #swagger.description = 'Substitui todas as informações de um Paciente existente no sistema.'
-      #swagger.parameters['paciente'] = {
-          in: 'body',
-          description: 'Informações completas do Paciente',
-          required: true,
-          schema: {
-              PacienteNome: 'Maria Silva',
-              DataNascimento: '1990-01-01',
-              Sexo: 'F',
-              Endereco: 'Rua das Flores, 123'
-          }
-      }
-      #swagger.responses[200] = {
-          description: 'Informações do Paciente substituídas com sucesso'
       }
      */
     )

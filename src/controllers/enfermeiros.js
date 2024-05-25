@@ -29,18 +29,6 @@ const patchEnfermeiros = async (req, res, next) => {
     }
   }
 
-  const putEnfermeiros = async (req, res, next) => {
-    try {
-      let params = req.body
-      params.id = req.params.id
-      await enfermeirosService.putEnfermeiros(params)
-      .then(ret => res.status(200).send(ret))
-      .catch(err => res.status(500).send(err))
-    } catch (err) {
-      next(err);
-    }
-  }
-
   const deleteEnfermeiros = async (req, res, next) => {
     try{
         await enfermeirosService.deleteEnfermeiros(req.params)
@@ -54,5 +42,4 @@ const patchEnfermeiros = async (req, res, next) => {
 module.exports.postEnfermeiros = postEnfermeiros
 module.exports.getEnfermeiros = getEnfermeiros
 module.exports.patchEnfermeiros = patchEnfermeiros
-module.exports.putEnfermeiros = putEnfermeiros
 module.exports.deleteEnfermeiros = deleteEnfermeiros

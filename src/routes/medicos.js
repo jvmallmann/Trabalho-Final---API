@@ -41,7 +41,7 @@ module.exports = (app) => {
      */
     )
     
-    app.patch('/medico', MedicosController.patchMedicos
+    app.patch('/medico/:id', MedicosController.patchMedicos
     /**  
       #swagger.tags = ["Médicos"]
       #swagger.summary = 'Atualiza informações de um Médico'
@@ -63,34 +63,13 @@ module.exports = (app) => {
      */
     )
     
-    app.put('/medico', MedicosController.putMedicos
-    /**  
-      #swagger.tags = ["Médicos"]
-      #swagger.summary = 'Substitui informações de um Médico'
-      #swagger.description = 'Substitui todas as informações de um Médico existente no sistema.'
-      #swagger.parameters['medico'] = {
-          in: 'body',
-          description: 'Informações completas do Médico',
-          required: true,
-          schema: {
-              MedicoNome: 'Dr. João Silva',
-              Especialidade: 'Cardiologia',
-              CRM: '123456',
-              MedicoTelefone: '(11) 98765-4321'
-          }
-      }
-      #swagger.responses[200] = {
-          description: 'Informações do Médico substituídas com sucesso'
-      }
-     */
-    )
     
-    app.delete('/medico/:MedicoID', MedicosController.deleteMedicos
+    app.delete('/medico/:id', MedicosController.deleteMedicos
     /**  
       #swagger.tags = ["Médicos"]
       #swagger.summary = 'Remove um Médico'
       #swagger.description = 'Remove um Médico cadastrado no sistema, baseado no ID fornecido.'
-      #swagger.parameters['MedicoID'] = {
+      #swagger.parameters['id'] = {
           in: 'path',
           description: 'ID do Médico a ser removido',
           required: true,
