@@ -1,8 +1,6 @@
-
 const enfermeirosController = require('../controllers/enfermeiros')
 
 module.exports = (app) => {
-
 
     app.post('/enfermeiro', enfermeirosController.postEnfermeiros
     /**  
@@ -17,7 +15,7 @@ module.exports = (app) => {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
             EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '01-01-2024',
+            DataAdmissao: '2024-01-01',
             Turno: 'Diurno'
         }
     }
@@ -38,7 +36,7 @@ module.exports = (app) => {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
             EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '01-01-2024',
+            DataAdmissao: '2024-01-01',
             Turno: 'Diurno'
         }]
     }
@@ -59,7 +57,7 @@ module.exports = (app) => {
             EnfermeiroNome: 'Ana Souza',
             Registro: 'ENF12345',
             EnfermeiroTelefone: '(11) 98765-4321',
-            DataAdmissao: '01-01-2024',
+            DataAdmissao: '2024-01-01',
             Turno: 'Noturno'
         }
     }

@@ -12,7 +12,7 @@ module.exports = (app) => {
           required: true,
           schema: {
               PacienteNome: 'Maria Silva',
-              DataNascimento: '01-01-1990',
+              DataNascimento: '1990-01-01',
               Sexo: 'F',
               Endereco: 'Rua das Flores, 123'
           }
@@ -32,7 +32,7 @@ module.exports = (app) => {
           description: 'Lista de Pacientes retornada com sucesso',
           schema: [{
               PacienteNome: 'Maria Silva',
-              DataNascimento: '01-01-1990',
+              DataNascimento: '1990-01-01',
               Sexo: 'F',
               Endereco: 'Rua das Flores, 123'
           }]
@@ -51,7 +51,7 @@ module.exports = (app) => {
           required: true,
           schema: {
               PacienteNome: 'Maria Silva',
-              DataNascimento: '01-01-1990',
+              DataNascimento: '1990-01-01',
               Sexo: 'F',
               Endereco: 'Rua das Flores, 123'
           }
@@ -79,4 +79,3 @@ module.exports = (app) => {
      */
     )
 }
-

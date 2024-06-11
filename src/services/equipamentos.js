@@ -87,7 +87,7 @@ const deleteEquipamentos = async (params) => {
     try {
         const { id } = params;
         const result = await db.query(sql_delete, [id]);
-        return result.rowCount > 0; // Retorna true se um equipameto foi deletado, false caso contrário
+        return result.rowCount > 0; 
     } catch (error) {
         console.error('Erro ao deletar o Equipamentos:', error);
         throw error;
@@ -97,6 +97,5 @@ const deleteEquipamentos = async (params) => {
 
 module.exports.postEquipamentos = postEquipamentos
 module.exports.patchEquipamentos = patchEquipamentos
-// module.exports.putMedicos = putMedicos
 module.exports.getEquipamentos = getEquipamentos
 module.exports.deleteEquipamentos = deleteEquipamentos

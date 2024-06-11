@@ -39,7 +39,7 @@ const deleteEnfermarias = async (params) => {
     try {
         const { id } = params;
         const result = await db.query(sql_delete, [id]);
-        return result.rowCount > 0; // Retorna true se uma Enfermaria foi deletado, false caso contrário
+        return result.rowCount > 0; 
     } catch (error) {
         console.error('Erro ao deletar o Enfermarias:', error);
         throw error;
@@ -54,7 +54,7 @@ const sql_patchEnfermarias =
 const patchEnfermarias = async (params) => {
     let fields = '';
     let binds = [];
-    binds.push(params.id);  // Assuming the ID is passed as 'id'
+    binds.push(params.id); 
     let countParams = 1;
 
     if (params.EnfermariaNome) {
@@ -90,8 +90,6 @@ const patchEnfermarias = async (params) => {
     let sql = sql_patchEnfermarias + fields + ' WHERE EnfermariaID = $1';
     return await db.query(sql, binds);
 }
-
-
 
 
 

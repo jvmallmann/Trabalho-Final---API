@@ -49,10 +49,10 @@ CREATE TABLE equipamentos (
 
 CREATE TABLE consultas (
     ConsultaID SERIAL   ,
-    DataConsulta DATE ,
-    HoraConsulta TIME ,
     PacienteID INT ,
     MedicoID INT ,
+    DataConsulta DATE ,
+    HoraConsulta TIME ,
     Descricao TEXT ,
     LocalConsuta VARCHAR(255) ,
 
@@ -77,15 +77,6 @@ CREATE TABLE internacao (
     FOREIGN KEY (PacienteID) REFERENCES Pacientes(PacienteID),
     FOREIGN KEY (EnfermariaID) REFERENCES Enfermarias(EnfermariaID)
     
-);
-
-
-CREATE TABLE internacaoEnfermeiros ( 
-    InternacaoID INT ,
-    EnfermeiroID INT ,
-    PRIMARY KEY (EnfermeiroID, InternacaoID),
-    FOREIGN KEY (EnfermeiroID) REFERENCES Enfermeiros(EnfermeiroID),
-    FOREIGN KEY (InternacaoID) REFERENCES Internacao(InternacaoID)
 );
 
 CREATE TABLE internacaoEquipamentos ( 

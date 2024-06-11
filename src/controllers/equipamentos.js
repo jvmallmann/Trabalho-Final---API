@@ -1,4 +1,4 @@
-const { validateNewEquipamento } = require('../validates/equipamentos');
+const { validateNewEquipamento, checkEquipamentosExiste } = require('../validates/equipamentos');
 const equipamentosService = require('../services/equipamentos');
 
 
@@ -24,26 +24,35 @@ const getEquipamentos = async (req, res) => {
     }
 };
 
-const patchEquipamentos = async (req, res, next) => {
-    try {
-      let params = req.body
-      params.id = req.params.id
-      await equipamentosService.patchEquipamentos(params)
-      .then(ret => res.status(200).send(ret))
-      .catch(err => res.status(500).send(err))
-    } catch (err) {
-      next(err);
+  const patchEquipamentos = async (req, res, next) => {
+      const errors = validateNewEquipamento(req.body);
+      if (errors.length > 0) {
+        return res.status(400).json({ errors });
+      } 
+      try {
+        let params = req.body
+        params.id = req.params.id
+        await equipamentosService.patchEquipamentos(params)
+        .then(ret => res.status(200).send(ret))
+        .catch(err => res.status(500).send(err))
+      } catch (err) {
+        next(err);
+      }
     }
-  }
+
   const deleteEquipamentos = async (req, res, next) => {
     try{
-        await equipamentosService.deleteEquipamentos(req.params)
-        .then(ret => res.status(204).send(ret))
-        .catch(err => res.status(500).send(err))
+      const { id } = req.params;
+      const existe = await checkEquipamentosExiste(id);
+      if (!existe) {
+          return res.status(404).json({ message: 'Equipamentos não encontrado' });
+      }
+      await equipamentosService.deleteEquipamentos({ id });
+      res.status(200).json({ message: 'Equipamentos deletado com sucesso' });
     } catch(err) {
-        next(err)
+      res.status(500).send(err.message);
     }
-}
+  }
 
 module.exports.postEquipamentos = postEquipamentos
 module.exports.getEquipamentos = getEquipamentos

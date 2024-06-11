@@ -1,3 +1,5 @@
+const db = require('../configs/pg');
+
 const validateNewEnfermeiro = (enfermeiroData) => {
     const errors = [];
 
@@ -14,7 +16,7 @@ const validateNewEnfermeiro = (enfermeiroData) => {
     }
 
     if (!isValidDate(enfermeiroData.DataAdmissao)) {
-        errors.push('A data de admissão do enfermeiro é obrigatória e deve estar no formato DD-MM-YYYY');
+        errors.push('A data de admissão do enfermeiro é obrigatória e deve estar no formato YYYY-MM-DD');
     }
 
     if (!enfermeiroData.Turno || typeof enfermeiroData.Turno !== 'string' || enfermeiroData.Turno.trim() === '') {
@@ -25,11 +27,16 @@ const validateNewEnfermeiro = (enfermeiroData) => {
 };
 
 const isValidDate = (dateString) => {
-    // Verifica se a data está no formato DD-MM-YYYY
-    const regex = /^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$/;
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
     return regex.test(dateString);
 };
 
+const checkEnfermeiroExiste = async (EnfermeiroID) => {
+    const result = await db.query('SELECT 1 FROM enfermeiros WHERE EnfermeiroID = $1', [EnfermeiroID]);
+    return result.rowCount > 0;
+};
+
 module.exports = {
-    validateNewEnfermeiro
+    validateNewEnfermeiro,
+    checkEnfermeiroExiste
 };

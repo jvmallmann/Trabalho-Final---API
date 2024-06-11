@@ -1,3 +1,6 @@
+const db = require('../configs/pg');
+
+
 const validateNewEnfermaria = (enfermariaData) => {
     const errors = [];
 
@@ -29,6 +32,13 @@ const validateNewEnfermaria = (enfermariaData) => {
     return errors;
 };
 
+const checkEnfermariaExiste = async (EnfermariaID) => {
+    const result = await db.query('SELECT 1 FROM enfermarias WHERE EnfermariaID = $1', [EnfermariaID]);
+    return result.rowCount > 0;
+};
+
+
 module.exports = {
-    validateNewEnfermaria
+    validateNewEnfermaria, 
+    checkEnfermariaExiste
 };

@@ -1,4 +1,4 @@
-const { validateNewMedico } = require('../validates/medicos');
+const { validateNewMedico, checkMedicoExiste } = require('../validates/medicos');
 const medicosService = require('../services/medicos');
 
 const postMedicos = async (req, res) => {
@@ -6,7 +6,7 @@ const postMedicos = async (req, res) => {
     if (errors.length > 0) {
       return res.status(400).json({ errors });
     }  
-  try {
+    try {
         const retorno = await medicosService.postMedicos(req.body);
         res.status(201).json(retorno);
     } catch (err) {
@@ -24,6 +24,10 @@ const getMedicos = async (req, res) => {
 };
 
 const patchMedicos = async (req, res, next) => {
+    const errors = validateNewMedico(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    }
     try {
       let params = req.body
       params.id = req.params.id
@@ -37,11 +41,17 @@ const patchMedicos = async (req, res, next) => {
 
   const deleteMedicos = async (req, res, next) => {
     try{
-        await medicosService.deleteMedicos(req.params)
-        .then(ret => res.status(204).send(ret))
-        .catch(err => res.status(500).send(err))
+
+      const { id } = req.params;
+        
+      const existe = await checkMedicoExiste(id);
+      if (!existe) {
+          return res.status(404).json({ message: 'Medico não encontrado' });
+      }
+      await medicosService.deleteMedicos({ id });
+      res.status(200).json({ message: 'Medico deletado com sucesso' });
     } catch(err) {
-        next(err)
+      res.status(500).send(err.message);
     }
 }
 

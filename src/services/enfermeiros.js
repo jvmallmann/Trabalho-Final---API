@@ -40,7 +40,7 @@ const deleteEnfermeiros = async (params) => {
     try {
         const { id } = params;
         const result = await db.query(sql_delete, [id]);
-        return result.rowCount > 0; // Retorna true se um paciente foi deletado, false caso contrário
+        return result.rowCount > 0; 
     } catch (error) {
         console.error('Erro ao deletar o Enfermeiros:', error);
         throw error;

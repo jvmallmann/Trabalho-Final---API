@@ -1,17 +1,19 @@
-const { validateNewPaciente } = require('../validates/pacientes');
+const { validateNewPaciente, checkPacienteExiste } = require('../validates/pacientes');
 const pacientesService = require('../services/pacientes');
 
 const postPacientes = async (req, res) => {
-    const errors = validateNewPaciente(req.body);
-    if (errors.length > 0) {
+  const errors = validateNewPaciente(req.body);
+  if (errors.length > 0) {
       return res.status(400).json({ errors });
-    }
-    try {
-        const retorno = await pacientesService.postPacientes(req.body);
-        res.status(201).json(retorno);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
+  }
+  try {
+      let params = req.body
+      params.id = req.params.id
+      const retorno = await pacientesService.postPacientes(params);
+      res.status(201).json(retorno);
+  } catch (err) {
+      res.status(500).send(err.message);
+  }
 };
 
 const getPacientes = async (req, res) => {
@@ -26,14 +28,24 @@ const getPacientes = async (req, res) => {
 
 const deletePacientes = async (req, res, next) => {
     try {
-        const retorno = await pacientesService.deletePacientes(req.params)
-        res.status(204).json(retorno)
+      const { id } = req.params;
+        
+      const existe = await checkPacienteExiste(id);
+      if (!existe) {
+          return res.status(404).json({ message: 'Paciente não encontrado' });
+      }
+      await pacientesService.deletePacientes({ id });
+      res.status(200).json({ message: 'Paciente deletado com sucesso' });
     } catch (err){
         res.status(500).send(err.message)
     }
 }
 
   const patchPacientes = async (req, res, next) => {
+    const errors = validateNewPaciente(req.body);
+    if (errors.length > 0) {
+        return res.status(400).json({ errors });
+    }
     try {
       let params = req.body
       params.id = req.params.id

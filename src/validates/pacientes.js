@@ -1,3 +1,5 @@
+const db = require('../configs/pg');
+
 const validateNewPaciente = (pacienteData) => {
     const errors = [];
 
@@ -6,7 +8,7 @@ const validateNewPaciente = (pacienteData) => {
     } 
 
     if (!pacienteData.DataNascimento || !isValidDate(pacienteData.DataNascimento)) {
-        errors.push('A data de nascimento do paciente é obrigatória e deve estar no formato DD-MM-YYYY');
+        errors.push('A data de nascimento do paciente é obrigatória e deve estar no formato YYYY-MM-DD');
     }
 
     if (!pacienteData.Sexo || !['F', 'M'].includes(pacienteData.Sexo)) {
@@ -21,10 +23,16 @@ const validateNewPaciente = (pacienteData) => {
 };
 
 const isValidDate = (dateString) => {
-    const regex = /^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$/;
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
     return regex.test(dateString);
 };
 
+const checkPacienteExiste = async (PacienteID) => {
+    const result = await db.query('SELECT 1 FROM pacientes WHERE PacienteID = $1', [PacienteID]);
+    return result.rowCount > 0;
+};
+
 module.exports = {
-    validateNewPaciente
+    validateNewPaciente,
+    checkPacienteExiste
 };

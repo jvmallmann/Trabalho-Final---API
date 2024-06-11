@@ -1,3 +1,5 @@
+const db = require('../configs/pg');
+
 const validateNewEquipamento = (equipamentoData) => {
     const errors = [];
 
@@ -14,9 +16,9 @@ const validateNewEquipamento = (equipamentoData) => {
         errors.push('O fabricante do equipamento é obrigatório e deve ser uma string não vazia');
     }
 
-    const dataCompraPattern = /^\d{2}-\d{2}-\d{4}$/;
+    const dataCompraPattern = /^\d{4}-\d{2}-\d{2}$/;
     if (!equipamentoData.DataCompra || !dataCompraPattern.test(equipamentoData.DataCompra)) {
-        errors.push('A data de compra do equipamento é obrigatória e deve estar no formato DD-MM-YYYY');
+        errors.push('A data de compra do equipamento é obrigatória e deve estar no formato YYYY-MM-DD');
     }
 
     if (!equipamentoData.NumeroSerie || typeof equipamentoData.NumeroSerie !== 'string' || equipamentoData.NumeroSerie.trim() === '') {
@@ -30,6 +32,12 @@ const validateNewEquipamento = (equipamentoData) => {
     return errors;
 };
 
+const checkEquipamentosExiste = async (EquipamentoID) => {
+    const result = await db.query('SELECT 1 FROM equipamentos WHERE EquipamentoID = $1', [EquipamentoID]);
+    return result.rowCount > 0;
+};
+
 module.exports = {
-    validateNewEquipamento
+    validateNewEquipamento,
+    checkEquipamentosExiste
 };

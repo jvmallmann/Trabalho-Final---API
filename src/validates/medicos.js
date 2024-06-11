@@ -1,3 +1,6 @@
+const db = require('../configs/pg');
+
+
 const validateNewMedico = (medicoData) => {
     const errors = [];
 
@@ -28,6 +31,12 @@ const validateNewMedico = (medicoData) => {
     return errors;
 };
 
+const checkMedicoExiste = async (MedicoID) => {
+    const result = await db.query('SELECT 1 FROM medicos WHERE MedicoID = $1', [MedicoID]);
+    return result.rowCount > 0;
+};
+
 module.exports = {
-    validateNewMedico
+    validateNewMedico, 
+    checkMedicoExiste
 };

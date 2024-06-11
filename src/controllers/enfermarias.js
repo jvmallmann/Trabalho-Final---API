@@ -1,4 +1,4 @@
-const { validateNewEnfermaria } = require('../validates/enfermarias');
+const { validateNewEnfermaria, checkEnfermariaExiste } = require('../validates/enfermarias');
 const enfermariasService = require('../services/enfermarias');
 
 const postEnfermarias = async (req, res) => {
@@ -35,14 +35,20 @@ const patchEnfermarias = async (req, res, next) => {
   }
 
   const deleteEnfermarias = async (req, res, next) => {
-    try{
-        await enfermariasService.deleteEnfermarias(req.params)
-        .then(ret => res.status(204).send(ret))
-        .catch(err => res.status(500).send(err))
-    } catch(err) {
-        next(err)
+    try {
+        const { id } = req.params;
+        
+        // Verifica se a enfermaria existe
+        const existe = await checkEnfermariaExiste(id);
+        if (!existe) {
+            return res.status(404).json({ message: 'Enfermaria não encontrada' });
+        }
+        await enfermariasService.deleteEnfermarias({ id });
+        res.status(200).json({ message: 'Enfermaria deletada com sucesso' });
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-}
+};
 
 module.exports.postEnfermarias = postEnfermarias
 module.exports.getEnfermarias = getEnfermarias
