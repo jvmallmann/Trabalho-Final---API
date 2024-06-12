@@ -46,7 +46,7 @@ const patchEnfermeiros = async (req, res, next) => {
             return res.status(404).json({ message: 'Enfermeiro não encontrado' });
         }
         await enfermeirosService.deleteEnfermeiros({ id });
-        res.status(200).json({ message: 'Enfermeiro deletado com sucesso' });
+        res.status(204).json({ message: 'Enfermeiro deletado com sucesso' });
     } catch(err) {
         res.status(500).send(err.message);
     }

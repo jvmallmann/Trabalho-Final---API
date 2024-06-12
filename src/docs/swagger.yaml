@@ -178,11 +178,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Paciente removido com sucesso"
           },
           "404": {
-            "description": "Não Encontrado"
+            "description": "Paciente não encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -355,11 +355,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Médico removido com sucesso"
           },
           "404": {
-            "description": "Não Encontrado"
+            "description": "Médico não encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -537,11 +537,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Enfermeiro removido com sucesso"
           },
           "404": {
-            "description": "Não Encontrado"
+            "description": "Enfermeiro não encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -764,7 +764,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Equipamento removido com sucesso"
           },
           "404": {
@@ -1022,7 +1022,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Enfermaria removida com sucesso"
           },
           "404": {
@@ -1300,7 +1300,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Consulta removida com sucesso"
           },
           "404": {
@@ -1598,7 +1598,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Internação removida com sucesso"
           },
           "404": {
@@ -1836,7 +1836,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "internacaoEquipamento removido com sucesso"
           },
           "404": {
@@ -1844,6 +1844,243 @@
           },
           "500": {
             "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Insere um novo Usuário",
+        "description": "Cadastra um novo Usuário no sistema.",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Informações do Usuário a ser cadastrado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Username": {
+                  "type": "string",
+                  "example": "usuario_exemplo"
+                },
+                "Senha": {
+                  "type": "string",
+                  "example": "senha_exemplo"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário cadastrado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UsuarioID": {
+                  "type": "number",
+                  "example": 1
+                },
+                "Username": {
+                  "type": "string",
+                  "example": "usuario_exemplo"
+                },
+                "Senha": {
+                  "type": "string",
+                  "example": "senha_exemplo"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Consulta lista de Usuários",
+        "description": "Consulta a lista de todos os Usuários cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "Lista de Usuários retornada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "UsuarioID": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "Username": {
+                    "type": "string",
+                    "example": "usuario_exemplo"
+                  },
+                  "Salt": {
+                    "type": "string",
+                    "example": "salt_exemplo"
+                  },
+                  "Senha": {
+                    "type": "string",
+                    "example": "senha_exemplo"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "patch": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Atualiza a senha de um Usuário",
+        "description": "Atualiza a senha de um Usuário já cadastrado no sistema.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "in": "body",
+            "description": "Nova senha do Usuário",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Senha": {
+                  "type": "string",
+                  "example": "nova_senha123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Senha atualizada com sucesso"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "delete": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Remove um Usuário",
+        "description": "Remove um Usuário cadastrado no sistema, baseado no ID fornecido.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do Usuário a ser removido"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuário removido com sucesso"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Faz login do usuário",
+        "description": "Faz login de um usuário existente e retorna um token JWT.",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Informações do usuário para login",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Username": {
+                  "type": "string",
+                  "example": "usuario_teste"
+                },
+                "Senha": {
+                  "type": "string",
+                  "example": "senha123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Credenciais inválidas",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário ou senha inválidos"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }

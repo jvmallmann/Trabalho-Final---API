@@ -78,9 +78,12 @@ module.exports = (app) => {
         required: true,
         type: 'integer'
     }
-    #swagger.responses[200] = {
+    #swagger.responses[204] = {
         description: 'Enfermeiro removido com sucesso'
     }
+    #swagger.responses[404] = {
+        description: 'Enfermeiro não encontrado'
+     }
     */
     )
 }

@@ -81,7 +81,7 @@ const deleteInternacao = async (req, res, next) => {
             return res.status(404).json({ message: 'Internação não encontrada' });
         }
         await internacaoService.deleteInternacao({ id });
-        res.status(200).json({ message: 'Internação deletada com sucesso' });
+        res.status(204).json({ message: 'Internação deletada com sucesso' });
     } catch(err) {
       res.status(500).send(err.message);
     }

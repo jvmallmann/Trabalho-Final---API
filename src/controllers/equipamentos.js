@@ -48,7 +48,7 @@ const getEquipamentos = async (req, res) => {
           return res.status(404).json({ message: 'Equipamentos não encontrado' });
       }
       await equipamentosService.deleteEquipamentos({ id });
-      res.status(200).json({ message: 'Equipamentos deletado com sucesso' });
+      res.status(204).json({ message: 'Equipamentos deletado com sucesso' });
     } catch(err) {
       res.status(500).send(err.message);
     }

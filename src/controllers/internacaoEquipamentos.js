@@ -73,7 +73,7 @@ const deleteInternacaoEquipamentos = async (req, res) => {
             return res.status(404).json({ message: 'InternacaoEquipamento não encontrado' });
         }
         await internacaoEquipamentosService.deleteInternacaoEquipamentos({ id });
-        res.status(200).json({ message: 'InternacaoEquipamento deletado com sucesso' });
+        res.status(204).json({ message: 'InternacaoEquipamento deletado com sucesso' });
     } catch (err) {
         res.status(500).send(err.message);
     }

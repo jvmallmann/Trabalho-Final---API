@@ -74,7 +74,7 @@ const deleteConsultas = async (req, res) => {
             return res.status(404).json({ message: 'Consulta não encontrada' });
         }
         await consultasService.deleteConsultas({ id });
-        res.status(200).json({ message: 'Consulta deletada com sucesso' });
+        res.status(204).json({ message: 'Consulta deletada com sucesso' });
     } catch (err) {
         res.status(500).send(err.message);
     }

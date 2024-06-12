@@ -104,7 +104,7 @@ module.exports = (app) => {
             type: 'integer',
             example: 1
         }
-        #swagger.responses[200] = {
+        #swagger.responses[204] = {
             description: 'Equipamento removido com sucesso'
         }
         #swagger.responses[404] = {

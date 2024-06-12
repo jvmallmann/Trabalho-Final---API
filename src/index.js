@@ -5,6 +5,10 @@ const port = 3000;
 app.use(express.json());
 require('./services/swagger');
 
+// const cookieParser = require('cookie-parser');
+
+// app.use(cookieParser());
+
 
 require('./routes/index')(app);
 app.get('/', (req,res) =>{ res.send('Hello World');});

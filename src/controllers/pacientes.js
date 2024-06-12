@@ -35,7 +35,7 @@ const deletePacientes = async (req, res, next) => {
           return res.status(404).json({ message: 'Paciente não encontrado' });
       }
       await pacientesService.deletePacientes({ id });
-      res.status(200).json({ message: 'Paciente deletado com sucesso' });
+      res.status(204).json({ message: 'Paciente deletado com sucesso' });
     } catch (err){
         res.status(500).send(err.message)
     }
