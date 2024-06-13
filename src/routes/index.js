@@ -20,6 +20,6 @@ module.exports = (app) => {
     internacoes(app)
     internacaoEquipamentos(app)
     Usuarios(app)
-    login(app);
+    login(app)
     
 }

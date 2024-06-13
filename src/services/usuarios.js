@@ -7,13 +7,13 @@ const sql_insert = `
 `;
 
 const postUsuarios = async (params) => {
-    const { Username, Senha } = params; // Corrigir o nome do campo para ser consistente com o banco de dados
-    const { salt, hashedPassword } = cript.criarUsuario(Senha);
-    const result = await db.query(sql_insert, [Username, salt, hashedPassword]);
+    const { Username, Senha } = params;
+    const { salt, hashedPass } = cript.createUser(Senha);
+    const result = await db.query(sql_insert, [Username, salt, hashedPass]);
     return result;
 };
 
-const sql_get = `SELECT UsuarioID, Username, salt  FROM usuarios`;
+const sql_get = `SELECT UsuarioID, Username, salt FROM usuarios`;
 
 const getUsuarios = async () => {
     const result = await db.query(sql_get, []);
@@ -38,12 +38,14 @@ const sql_update_password = `
 
 const patchUsuarios = async (params) => {
     const { UsuarioID, Senha } = params;
-    const { salt, hashedPassword } = cript.criarUsuario(Senha);
-    const result = await db.query(sql_update_password, [hashedPassword, salt, UsuarioID]);
+    const { salt, hashedPass } = cript.createUser(Senha);
+    const result = await db.query(sql_update_password, [hashedPass, salt, UsuarioID]);
     return result.rowCount > 0;
 };
 
-module.exports.postUsuarios = postUsuarios;
-module.exports.patchUsuarios = patchUsuarios;
-module.exports.getUsuarios = getUsuarios;
-module.exports.deleteUsuarios = deleteUsuarios;
+module.exports = {
+    postUsuarios,
+    getUsuarios,
+    deleteUsuarios,
+    patchUsuarios
+};

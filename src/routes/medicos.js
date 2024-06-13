@@ -1,7 +1,8 @@
-const MedicosController = require('../controllers/medicos')
+const MedicosController = require('../controllers/medicos');
+const checkPermission = require("../middlewares/auth");
 
 module.exports = (app) => {
-    app.post('/medico', MedicosController.postMedicos
+    app.post('/medico',checkPermission, MedicosController.postMedicos
     /**  
       #swagger.tags = ["Médicos"]
       #swagger.summary = 'Insere um novo Médico'
@@ -23,7 +24,7 @@ module.exports = (app) => {
      */
     )
     
-    app.get('/medico', MedicosController.getMedicos
+    app.get('/medico',checkPermission, MedicosController.getMedicos
     /**  
       #swagger.tags = ["Médicos"]
       #swagger.summary = 'Consulta lista de Médicos'
@@ -41,7 +42,7 @@ module.exports = (app) => {
      */
     )
     
-    app.patch('/medico/:id', MedicosController.patchMedicos
+    app.patch('/medico/:id',checkPermission, MedicosController.patchMedicos
     /**  
       #swagger.tags = ["Médicos"]
       #swagger.summary = 'Atualiza informações de um Médico'
@@ -64,7 +65,7 @@ module.exports = (app) => {
     )
     
     
-    app.delete('/medico/:id', MedicosController.deleteMedicos
+    app.delete('/medico/:id',checkPermission, MedicosController.deleteMedicos
     /**  
       #swagger.tags = ["Médicos"]
       #swagger.summary = 'Remove um Médico'

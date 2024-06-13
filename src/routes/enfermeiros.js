@@ -1,8 +1,10 @@
 const enfermeirosController = require('../controllers/enfermeiros')
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
 
-    app.post('/enfermeiro', enfermeirosController.postEnfermeiros
+    app.post('/enfermeiro',checkPermission, enfermeirosController.postEnfermeiros
     /**  
      #swagger.tags = ["Enfermeiros"]
     #swagger.summary = 'Insere um novo Enfermeiro'
@@ -25,7 +27,7 @@ module.exports = (app) => {
     */
     )
 
-    app.get('/enfermeiro', enfermeirosController.getEnfermeiros
+    app.get('/enfermeiro',checkPermission, enfermeirosController.getEnfermeiros
     /**  
      #swagger.tags = ["Enfermeiros"]
     #swagger.summary = 'Consulta lista de Enfermeiros'
@@ -43,7 +45,7 @@ module.exports = (app) => {
     */
     )
 
-    app.patch('/enfermeiro/:id', enfermeirosController.patchEnfermeiros
+    app.patch('/enfermeiro/:id',checkPermission, enfermeirosController.patchEnfermeiros
     /**  
     #swagger.tags = ["Enfermeiros"]
     #swagger.summary = 'Atualiza informações de um Enfermeiro'
@@ -67,7 +69,7 @@ module.exports = (app) => {
     */
     )
 
-    app.delete('/enfermeiro/:id', enfermeirosController.deleteEnfermeiros
+    app.delete('/enfermeiro/:id', checkPermission,enfermeirosController.deleteEnfermeiros
     /**  
      #swagger.tags = ["Enfermeiros"]
     #swagger.summary = 'Remove um Enfermeiro'

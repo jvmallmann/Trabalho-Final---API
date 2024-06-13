@@ -1,4 +1,6 @@
 const loginController = require('../controllers/login');
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
     app.post('/login', loginController.login

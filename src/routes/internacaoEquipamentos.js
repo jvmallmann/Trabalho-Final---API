@@ -1,8 +1,10 @@
 const internacaoEquipamentosController = require('../controllers/internacaoEquipamentos');
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
 
-    app.post('/internacaoEquipamento', internacaoEquipamentosController.postInternacaoEquipamentos
+    app.post('/internacaoEquipamento',checkPermission, internacaoEquipamentosController.postInternacaoEquipamentos
     /**  
      #swagger.tags = ["InternacaoEquipamentos"]
      #swagger.summary = 'Insere uma nova Internação de Equipamento'
@@ -34,7 +36,7 @@ module.exports = (app) => {
     */
     )
 
-    app.get('/internacaoEquipamento', internacaoEquipamentosController.getInternacaoEquipamentos
+    app.get('/internacaoEquipamento',checkPermission, internacaoEquipamentosController.getInternacaoEquipamentos
     /**  
      #swagger.tags = ["InternacaoEquipamentos"]
      #swagger.summary = 'Consulta lista de Internações de Equipamentos'
@@ -52,7 +54,7 @@ module.exports = (app) => {
     */
     )
 
-    app.patch('/internacaoEquipamento/:id', internacaoEquipamentosController.patchInternacaoEquipamentos
+    app.patch('/internacaoEquipamento/:id',checkPermission, internacaoEquipamentosController.patchInternacaoEquipamentos
     /**  
      #swagger.tags = ["InternacaoEquipamentos"]
      #swagger.summary = 'Atualiza informações de uma Internação de Equipamento'
@@ -94,7 +96,7 @@ module.exports = (app) => {
     */
     )
 
-    app.delete('/internacaoEquipamento/:id', internacaoEquipamentosController.deleteInternacaoEquipamentos
+    app.delete('/internacaoEquipamento/:id',checkPermission, internacaoEquipamentosController.deleteInternacaoEquipamentos
     /**  
      #swagger.tags = ["InternacaoEquipamentos"]
      #swagger.summary = 'Remove uma Internação de Equipamento'

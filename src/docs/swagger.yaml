@@ -60,6 +60,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -101,6 +104,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -157,6 +163,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -180,6 +189,9 @@
         "responses": {
           "204": {
             "description": "Paciente removido com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Paciente não encontrado"
@@ -233,6 +245,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -278,6 +293,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -334,6 +352,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -357,6 +378,9 @@
         "responses": {
           "204": {
             "description": "Médico removido com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Médico não encontrado"
@@ -414,6 +438,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -459,6 +486,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -516,6 +546,9 @@
           "200": {
             "description": "Enfermeiro atualizado com sucesso"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -539,6 +572,9 @@
         "responses": {
           "204": {
             "description": "Enfermeiro removido com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Enfermeiro não encontrado"
@@ -628,6 +664,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -677,6 +716,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -739,6 +781,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Equipamento não encontrado"
           },
@@ -766,6 +811,9 @@
         "responses": {
           "204": {
             "description": "Equipamento removido com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Equipamento não encontrado"
@@ -855,6 +903,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -904,6 +955,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -998,6 +1052,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Enfermaria não encontrada"
           },
@@ -1024,6 +1081,9 @@
         "responses": {
           "204": {
             "description": "Enfermaria removida com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Enfermaria não encontrada"
@@ -1121,6 +1181,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -1174,6 +1237,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1276,6 +1342,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Consulta não encontrada"
           },
@@ -1302,6 +1371,9 @@
         "responses": {
           "204": {
             "description": "Consulta removida com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Consulta não encontrada"
@@ -1343,10 +1415,6 @@
                 "DataInicioInternacao": {
                   "type": "string",
                   "example": "2024-01-01"
-                },
-                "DataFimInternacao": {
-                  "type": "string",
-                  "example": "2024-01-10"
                 },
                 "ValorTotal": {
                   "type": "number",
@@ -1407,6 +1475,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -1464,6 +1535,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1574,6 +1648,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Internação não encontrada"
           },
@@ -1600,6 +1677,9 @@
         "responses": {
           "204": {
             "description": "Internação removida com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Internação não encontrada"
@@ -1681,6 +1761,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -1726,6 +1809,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1812,6 +1898,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "internacaoEquipamento não encontrado"
           },
@@ -1838,6 +1927,9 @@
         "responses": {
           "204": {
             "description": "internacaoEquipamento removido com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "internacaoEquipamento não encontrado"
@@ -1903,6 +1995,9 @@
           "400": {
             "description": "Dados inválidos"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -1945,6 +2040,9 @@
               }
             }
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -1985,6 +2083,9 @@
           "200": {
             "description": "Senha atualizada com sucesso"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Usuário não encontrado"
           },
@@ -2013,6 +2114,9 @@
         "responses": {
           "204": {
             "description": "Usuário removido com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Usuário não encontrado"

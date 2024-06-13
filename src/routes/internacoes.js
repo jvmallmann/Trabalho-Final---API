@@ -1,8 +1,10 @@
 const internacaoController = require('../controllers/internacoes');
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
 
-    app.post('/internacao', internacaoController.postInternacao
+    app.post('/internacao',checkPermission, internacaoController.postInternacao
     /**  
      #swagger.tags = ["Internacoes"]
      #swagger.summary = 'Insere uma nova Internação'
@@ -16,7 +18,6 @@ module.exports = (app) => {
             MedicoID: 1,
             PacienteID: 1,
             DataInicioInternacao: '2024-01-01',
-            DataFimInternacao: '2024-01-10',
             ValorTotal: 1000.00,
             StatusInternacao: 'Em andamento'
         }
@@ -40,7 +41,7 @@ module.exports = (app) => {
     */
     );
 
-    app.get('/internacao', internacaoController.getInternacoes
+    app.get('/internacao',checkPermission, internacaoController.getInternacoes
     /**  
      #swagger.tags = ["Internacoes"]
      #swagger.summary = 'Consulta lista de Internações'
@@ -61,7 +62,7 @@ module.exports = (app) => {
     */
     );
 
-    app.patch('/internacao/:id', internacaoController.patchInternacao
+    app.patch('/internacao/:id',checkPermission, internacaoController.patchInternacao
     /**  
      #swagger.tags = ["Internacoes"]
      #swagger.summary = 'Atualiza informações de uma Internação'
@@ -108,7 +109,7 @@ module.exports = (app) => {
      }
     */
     );
-    app.delete('/internacao/:id', internacaoController.deleteInternacao
+    app.delete('/internacao/:id',checkPermission, internacaoController.deleteInternacao
     /**  
      #swagger.tags = ["Internacoes"]
      #swagger.summary = 'Remove uma Internação'

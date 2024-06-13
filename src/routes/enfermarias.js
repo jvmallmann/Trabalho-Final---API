@@ -1,8 +1,10 @@
 const enfermariasController = require('../controllers/enfermarias')
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
 
-    app.post('/enfermaria', enfermariasController.postEnfermarias
+    app.post('/enfermaria',checkPermission, enfermariasController.postEnfermarias
     /**  
      #swagger.tags = ["Enfermarias"]
      #swagger.summary = 'Insere uma nova Enfermaria'
@@ -36,7 +38,7 @@ module.exports = (app) => {
     */
     )
 
-    app.get('/enfermaria', enfermariasController.getEnfermarias
+    app.get('/enfermaria',checkPermission, enfermariasController.getEnfermarias
     /**  
      #swagger.tags = ["Enfermarias"]
      #swagger.summary = 'Consulta lista de Enfermarias'
@@ -55,7 +57,7 @@ module.exports = (app) => {
     */
     )
 
-    app.patch('/enfermaria/:id', enfermariasController.patchEnfermarias
+    app.patch('/enfermaria/:id',checkPermission, enfermariasController.patchEnfermarias
     /**  
      #swagger.tags = ["Enfermarias"]
      #swagger.summary = 'Atualiza informações de uma Enfermaria'
@@ -99,7 +101,7 @@ module.exports = (app) => {
     */
     )
 
-    app.delete('/enfermaria/:id', enfermariasController.deleteEnfermarias
+    app.delete('/enfermaria/:id',checkPermission, enfermariasController.deleteEnfermarias
     /**  
      #swagger.tags = ["Enfermarias"]
      #swagger.summary = 'Remove uma Enfermaria'

@@ -1,8 +1,10 @@
 const consultasController = require('../controllers/consultas');
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
 
-    app.post('/consulta', consultasController.postConsultas
+    app.post('/consulta',checkPermission, consultasController.postConsultas
     /**  
      #swagger.tags = ["Consultas"]
      #swagger.summary = 'Insere uma nova Consulta'
@@ -38,7 +40,7 @@ module.exports = (app) => {
     */
     )
 
-    app.get('/consulta', consultasController.getConsultas
+    app.get('/consulta',checkPermission, consultasController.getConsultas
     /**  
      #swagger.tags = ["Consultas"]
      #swagger.summary = 'Consulta lista de Consultas'
@@ -58,7 +60,7 @@ module.exports = (app) => {
     */
     )
 
-    app.patch('/consulta/:id', consultasController.patchConsultas
+    app.patch('/consulta/:id',checkPermission, consultasController.patchConsultas
     /**  
      #swagger.tags = ["Consultas"]
      #swagger.summary = 'Atualiza informações de uma Consulta'
@@ -104,7 +106,7 @@ module.exports = (app) => {
     */
     )
 
-    app.delete('/consulta/:id', consultasController.deleteConsultas
+    app.delete('/consulta/:id', checkPermission,consultasController.deleteConsultas
     /**  
      #swagger.tags = ["Consultas"]
      #swagger.summary = 'Remove uma Consulta'

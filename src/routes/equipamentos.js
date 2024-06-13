@@ -1,8 +1,10 @@
 const equipamentosController = require('../controllers/equipamentos');
+const checkPermission = require("../middlewares/auth");
+
 
 module.exports = (app) => {
 
-    app.post('/equipamento', equipamentosController.postEquipamentos
+    app.post('/equipamento',checkPermission, equipamentosController.postEquipamentos
     /**  
         #swagger.tags = ["Equipamentos"]
         #swagger.summary = 'Insere um novo Equipamento'
@@ -36,7 +38,7 @@ module.exports = (app) => {
     */
     );
 
-    app.get('/equipamento', equipamentosController.getEquipamentos
+    app.get('/equipamento',checkPermission, equipamentosController.getEquipamentos
     /**  
         #swagger.tags = ["Equipamentos"]
         #swagger.summary = 'Consulta lista de Equipamentos'
@@ -55,7 +57,7 @@ module.exports = (app) => {
     */
     );
 
-    app.patch('/equipamento/:id', equipamentosController.patchEquipamentos
+    app.patch('/equipamento/:id',checkPermission, equipamentosController.patchEquipamentos
     /**  
         #swagger.tags = ["Equipamentos"]
         #swagger.summary = 'Atualiza informações de um Equipamento'
@@ -92,7 +94,7 @@ module.exports = (app) => {
     );
 
 
-    app.delete('/equipamento/:id', equipamentosController.deleteEquipamentos
+    app.delete('/equipamento/:id',checkPermission, equipamentosController.deleteEquipamentos
     /**  
         #swagger.tags = ["Equipamentos"]
         #swagger.summary = 'Remove um Equipamento'

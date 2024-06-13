@@ -30,4 +30,6 @@ const loginUsuario = async (params) => {
     return { token };
 };
 
-module.exports.loginUsuario = loginUsuario
+module.exports = {
+    loginUsuario,
+};

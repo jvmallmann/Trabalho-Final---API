@@ -74,7 +74,7 @@ const patchInternacao = async (req, res) => {
 
 const deleteInternacao = async (req, res, next) => {
     try{
-        const { id } = req.params.id;
+        const { id } = req.params;
         
         const existe = await checkInternacaoExiste(id);
         if (!existe) {

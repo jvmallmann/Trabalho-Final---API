@@ -1,7 +1,8 @@
 const pacientesController = require('../controllers/pacientes')
+const checkPermission = require("../middlewares/auth");
 
 module.exports = (app) => {
-    app.post('/paciente', pacientesController.postPacientes
+    app.post('/paciente',checkPermission, pacientesController.postPacientes
     /**  
       #swagger.tags = ["Pacientes"]
       #swagger.summary = 'Insere um novo Paciente'
@@ -23,7 +24,7 @@ module.exports = (app) => {
      */
     )
     
-    app.get('/paciente', pacientesController.getPacientes
+    app.get('/paciente',checkPermission, pacientesController.getPacientes
     /**  
       #swagger.tags = ["Pacientes"]
       #swagger.summary = 'Consulta lista de Pacientes'
@@ -40,7 +41,7 @@ module.exports = (app) => {
      */
     )
     
-    app.patch('/paciente/:id', pacientesController.patchPacientes
+    app.patch('/paciente/:id',checkPermission, pacientesController.patchPacientes
     /**  
       #swagger.tags = ["Pacientes"]
       #swagger.summary = 'Atualiza informações de um Paciente'
@@ -62,7 +63,7 @@ module.exports = (app) => {
      */
     )
     
-    app.delete('/paciente/:id', pacientesController.deletePacientes
+    app.delete('/paciente/:id',checkPermission, pacientesController.deletePacientes
     /**  
       #swagger.tags = ["Pacientes"]
       #swagger.summary = 'Remove um Paciente'
